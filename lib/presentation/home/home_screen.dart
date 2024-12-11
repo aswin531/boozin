@@ -1,25 +1,17 @@
 import 'package:boozinmachinetask/controllers/boozin_health_controller.dart';
-import 'package:boozinmachinetask/presentation/home/progress_card.dart';
+import 'package:boozinmachinetask/core/utils/theme_helper.dart';
+import 'package:boozinmachinetask/presentation/home/widgets/progress_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  String _getThemeSpecificIcon(
-      BuildContext context, String lightThemeIcon, String darkThemeIcon) {
-    return Theme.of(context).brightness == Brightness.dark
-        ? darkThemeIcon
-        : lightThemeIcon;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final BoozinHealthController healthController =
-        Get.put(BoozinHealthController());
+    final BoozinHealthController healthController = Get.put(BoozinHealthController());
     Color scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    Color textColor =
-        Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white;
+    Color textColor = Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white;
 
     return Scaffold(
       backgroundColor: scaffoldBackgroundColor,
@@ -63,10 +55,11 @@ class HomeScreen extends StatelessWidget {
                   title: "Steps",
                   value: stepsData.steps.toStringAsFixed(0),
                   goal: "15,000",
-                  svgPath: _getThemeSpecificIcon(
-                      context,
-                      'assets/svgs/ion_footsteps-sharp-light.svg',
-                      'assets/svgs/foot_strp_dark.svg'),
+                  svgPath: ThemeHelpers.getThemeSpecificIcon(
+                    context,
+                    'assets/svgs/ion_footsteps-sharp-light.svg',
+                    'assets/svgs/foot_strp_dark.svg',
+                  ),
                 ),
                 const SizedBox(height: 10),
 
@@ -75,10 +68,11 @@ class HomeScreen extends StatelessWidget {
                   title: "Calories Burned",
                   value: caloriesData.caloriesBurned.toString(),
                   goal: "2000",
-                  svgPath: _getThemeSpecificIcon(
-                      context,
-                      'assets/svgs/kcal-light.svg',
-                      'assets/svgs/kcal-dark.svg'),
+                  svgPath: ThemeHelpers.getThemeSpecificIcon(
+                    context,
+                    'assets/svgs/kcal-light.svg',
+                    'assets/svgs/kcal-dark.svg',
+                  ),
                 ),
               ],
             ),
@@ -88,3 +82,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
